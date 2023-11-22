@@ -28,9 +28,9 @@ app.get("/api/:date?", (req, res) => {
   let isDateValid = !isNaN(new Date(req.params.date))
 
   if (isDateValid) {
-    let isoDateSTring = new Date(req.params.date).toISOString();
+    let isoDateSTring = new Date(req.params.date).toUTCString();
     let unixTimeStamp = Math.floor(new Date(req.params.date).getTime() / 1000);
-    res.json({ utc: isoDateSTring, unix: unixTimeStamp });
+    res.json({ unix: unixTimeStamp, utc: isoDateSTring });
   } else {
     res.json({ error: "Invalid Date" });
   }
